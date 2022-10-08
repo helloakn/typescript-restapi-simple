@@ -2,6 +2,7 @@
   "name": "akncom",
   "version": "1.0.0",
   "description": "",
+  "main":"build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc -p tsconfig.json -w & nodemon ./build/index.js",
