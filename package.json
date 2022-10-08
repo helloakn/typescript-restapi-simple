@@ -9,7 +9,11 @@
     "start": "tsc && node ./build/index.js"
   },
   "author": "AKN",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helloakn/typescript-restapi-simple.git"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
