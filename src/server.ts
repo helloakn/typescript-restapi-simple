@@ -4,6 +4,7 @@ import cors from 'cors'
 
 import Debug from './lib/debug'
 import MainRouter from './router/main.router'
+import {CommonRoutesConfig} from './common/common.routes.config';
 
 export default class Server {
   private httpSvr: express.Application;
@@ -21,6 +22,11 @@ export default class Server {
   
     const mainRouter = new MainRouter(this.httpSvr);
     mainRouter.setUp();
+
+    let routesList = mainRouter.getRouters();
+    routesList.forEach((route: CommonRoutesConfig)=>{
+      Debug.log(route.getRouteName())
+    });
 
     this.httpSvr.listen(this.port, () => {
       //console.log(`Server running at http://localhost:${this.port}`);

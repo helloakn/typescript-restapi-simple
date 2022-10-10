@@ -1,5 +1,11 @@
 import Express from 'express';
-/* ok hahah */
+
+
+
+interface IEvent {
+  (req: Express.Request, res: Express.Response): void;
+}
+
 export abstract class CommonRoutesConfig {
   httpServer: Express.Application;
   routeName: string;
@@ -15,6 +21,23 @@ export abstract class CommonRoutesConfig {
 
   getRouteName() {
       return this.routeName;
+  }
+
+  setRoute(methods : Array<string>, url: string, event:IEvent): void{
+    let route = this.httpServer.route(`${this.routePrefix+url}`);
+    methods.forEach(method=>{
+      switch(method){
+        case 'post':
+          console.log(`${this.routePrefix+url}`)
+          route.post(event);
+          break;
+  
+        case 'get':
+          console.log(`${this.routePrefix+url}`)
+          route.get(event);
+          break;
+      }//end Switch
+    }) //end forEach
   }
 
   abstract configureRoutes(): Express.Application;
