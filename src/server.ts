@@ -2,6 +2,7 @@ import express from 'express';
 import * as bodyparser from 'body-parser';
 import cors from 'cors'
 
+import Debug from './lib/debug'
 import MainRouter from './router/main.router'
 
 export default class Server {
@@ -22,7 +23,14 @@ export default class Server {
     mainRouter.setUp();
 
     this.httpSvr.listen(this.port, () => {
-      console.log(`Server running at http://localhost:${this.port}`);
+      //console.log(`Server running at http://localhost:${this.port}`);
+      console.log('hello')
+      Debug.log('aa').warning('cc').log('haha');
+      
+      let deb = new Debug();
+      console.log(deb)
+      //Debug.log('this is log').warning('this is warning')
+      Debug.log(`Server running at http://localhost:${this.port}`)
     });
   }
 }
