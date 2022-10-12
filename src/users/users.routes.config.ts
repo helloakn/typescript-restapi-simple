@@ -1,5 +1,6 @@
-import {CommonRoutesConfig} from '../common/common.routes.config';
 import express from 'express';
+
+import CommonRoutesConfig from '../common/common.routes.config';
 
 export class UsersRoutes extends CommonRoutesConfig {
 
@@ -18,5 +19,4 @@ export class UsersRoutes extends CommonRoutesConfig {
     });
     return this.httpServer;
   }
-
 }

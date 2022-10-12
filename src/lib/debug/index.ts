@@ -48,9 +48,14 @@ export default class Debug implements StaticImplements<IDebugStatic, typeof Debu
 *   or
 *   new Debug().log('this is log').warning('this is warning')
 **/
+  public static Colors = Colors;
   public static log(msg: string): IDebugStatic {
     console.log(Colors.FgWhite, msg, Colors.Reset)
     return this;
+  }
+
+  public static logs(...msgs: string[]): void {
+    console.log(...msgs)  
   }
 
   public static warning(msg: string): IDebugStatic {

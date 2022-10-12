@@ -2,11 +2,10 @@
   "name": "akncom",
   "version": "1.0.0",
   "description": "",
-  "main":"build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc -p tsconfig.json -w & nodemon ./build/index.js",
-    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w & nodemon ./build/index.js",
+    "build": "tsc -p ./tsconfig.json",
     "start": "tsc && node ./build/index.js"
   },
   "author": "AKN",

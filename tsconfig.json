@@ -6,7 +6,8 @@
     "strict": true,
     "esModuleInterop": true,
     "inlineSourceMap": true,
-    "removeComments": true
+    "removeComments": true,
+    "rootDir": "src"
   },
   "include": ["src/**/*", "tests/**/*"]
 }

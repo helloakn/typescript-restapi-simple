@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {CommonRoutesConfig} from '../common/common.routes.config';
+import CommonRoutesConfig from '../common/common.routes.config';
 
 import {CategoryRoutes} from './category.routes';
 
@@ -19,7 +19,8 @@ export default class MainRouter {
 
   setUp(): void{
 
-    this.routes.push(new CategoryRoutes(this.httpSvr,'user-routes','/categories'));
+    this.routes.push(new CategoryRoutes(this.httpSvr,'Category Routes','/categories'));
+    this.routes.push(new CategoryRoutes(this.httpSvr,'Demo Routes','/cc'));
 
   }
 }

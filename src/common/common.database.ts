@@ -1,5 +1,23 @@
 import mysql from "mysql2";
 
+import config from './common.globalConfig'
+
+const { DatabaseConfig } = config
+
+// const dbConnection = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PWD,
+//   database: process.env.DB_NAME
+// });
+
+const dbConnection = mysql.createConnection({
+    host: DatabaseConfig.host,
+    user: DatabaseConfig.user,
+    password: DatabaseConfig.password,
+    database: DatabaseConfig.database
+  });
+
 export interface IDatabaseConfig {
   host: string;
   user: string;
@@ -7,20 +25,17 @@ export interface IDatabaseConfig {
   database: string;
 }
 
+
 export type TMySqlConnection = mysql.Connection;
 
 export default class Database {
+  public dbConnection : TMySqlConnection;
 
-  private _config : IDatabaseConfig;
-  private _dbC : TMySqlConnection;
-
-  constructor(dbConfig : IDatabaseConfig){
-    this._config = dbConfig;
-    this._dbC = mysql.createConnection(this._config);
+  constructor(){
+    this.dbConnection = dbConnection
+    console.log('database.constructor')
   }
 
-  init(): TMySqlConnection{
-    return this._dbC
-  }
+
 
 }

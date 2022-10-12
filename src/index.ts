@@ -1,4 +1,4 @@
-import config from './common/global.config'
+import config from './common/common.globalConfig'
 import Server from './server'
 
 const { ServerConfig } = config
