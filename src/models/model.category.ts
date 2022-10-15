@@ -1,11 +1,16 @@
 import Table from '../common/common.table'
 
-export type TCategoryModel = {
-  id: number,
-  name: string
+export interface TCategoryModel {
+  id?: number,
+  name: string,
+  image: string,
+  description: string,
+  created_at?: Date,
+  updated_at?: Date,
+  deleted_at?: Date
 }
 
-export class CategoryModel<T> extends Table<T> {
+export class CategoryModel<T  extends { id?: number }> extends Table<T> {
   constructor(){
     super("tblCategory")
   }

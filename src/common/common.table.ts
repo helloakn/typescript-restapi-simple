@@ -1,32 +1,57 @@
+/*
+*
+*
+*
+*
+*
+*
+*
+*
+*/
 
 import Database from './common.database'
 
-interface IBaseModel<T> extends Database{
-  tableName: string
-  //insert(...msgs: string[]) : void
-  insert(data: T) : void
-  getById(id:number) : T
+interface Tid {
+  id?: number;
 }
+
+interface IBaseModel<T> extends Database{
+  tableName: string;
+  insert(data: T): Promise<T>;
+  getById(id:number) : T;
+}
+
+type TDBError =  {
+  isError: boolean,
+  message: string,
+  data: any
+} 
 /*
-return -> {status:true/false,message:'something',data:{...}}
+return -> {isError:true/false,message:'something',data:{...}}
 */
 
-export default class Table<T> extends Database implements IBaseModel<T> {
-//class BaseModel<T> implements IBaseModel<T> {
-  //dbConnection inherient property
+export default class Table<T  extends { id?: number }> extends Database implements IBaseModel<T> {
+  
   constructor(public tableName:string){
     super();
   }
 
-  // insert(...data: string[]) : void {
-
-  // }
-  insert(data: T): void {
-    
+  insert(data: T): Promise<T> {
+    return new Promise<T>((resolve,reject) => {
+      this.dbConnection.query(`INSERT INTO ${this.tableName} SET ?`, data, (err, res) => {
+        if (err) {
+          reject(err)
+          return;
+        }
+        data.id = res.insertId
+        resolve(data);
+      });
+    })
   }
+  
   hello():string{
-    console.log(this.dbConnection)
-    return "this is hello fun"
+   // console.log(this.dbConnection)
+    return "this is hello fun test"
   }
 
   getById(id:number) : T {

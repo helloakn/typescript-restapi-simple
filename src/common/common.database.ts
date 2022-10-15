@@ -1,22 +1,8 @@
-import mysql from "mysql2";
-
+import mysql from 'mysql'
 import config from './common.globalConfig'
 
 const { DatabaseConfig } = config
 
-// const dbConnection = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PWD,
-//   database: process.env.DB_NAME
-// });
-
-const dbConnection = mysql.createConnection({
-    host: DatabaseConfig.host,
-    user: DatabaseConfig.user,
-    password: DatabaseConfig.password,
-    database: DatabaseConfig.database
-  });
 
 export interface IDatabaseConfig {
   host: string;
@@ -25,6 +11,20 @@ export interface IDatabaseConfig {
   database: string;
 }
 
+
+//export type TOkPacket = OkPacket;
+const dbConnection : mysql.Connection = mysql.createConnection({
+    host: DatabaseConfig.host,
+    user: DatabaseConfig.user,
+    password: DatabaseConfig.password,
+    database: DatabaseConfig.database
+  });
+
+  dbConnection.connect(error => {
+    if (error) throw error;
+    console.log("Successfully connected to the database.");
+  });
+  
 
 export type TMySqlConnection = mysql.Connection;
 
@@ -35,7 +35,4 @@ export default class Database {
     this.dbConnection = dbConnection
     console.log('database.constructor')
   }
-
-
-
 }
